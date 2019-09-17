@@ -1,0 +1,111 @@
+#include<stdio.h>
+#ifndef _List_H
+
+struct Node;
+typedef struct Node *PtrToNode; 
+typedef PtrToNode List;
+typedef PtrToNode Position;
+
+List MakeEmpty(List L);
+int IsEmpty(List l);
+int IsLast(Position P,List l);
+Position Find(ElementType X,List L);
+void Delete (ElementType X,List L);
+Position FindPrevious(ElementType X,List L);
+void Insert(Element X,List L,Position P);
+void DeleteList(List L);
+Position Header(List L);
+Position Frist(List L);
+Position Advance(Position P);
+ELementType Retrieve(Position P);
+
+#endif
+struct Node
+{
+	ElementType Element;
+	Position Next;
+};
+
+
+
+
+//检验列表是否为空，空则返回1，表示是空列表。 
+int IsEmpty(List L){
+	return L->Next == NULL;
+}
+
+/*判断此列表的P位置是否是最后一个元素*/ 
+int IsLast(Position P,List L){
+	return P->next == NULL;
+} 
+
+//在链表中查询是否有x元素，在循环中判断是否存在，不存在则返回null，存在则返回位置 
+Position Find(ElementType X,List L){
+	Position P;
+	
+	P = L->Next;
+	while( P != NULL && P->Element != X){
+		P = P->next; 
+	} 
+	return P;
+}
+
+//在列表中删除一个元素，首先找到这个元素的前驱元，然后判断是否是最后一个元素
+//如果不是就开始执行删除
+//将p-next首先赋给一个中间变量，然后将p-next的值改成p-next-next的值，将p指向后两个以来跳过p-next
+//再删除p-next的地址，也就是中间变量 
+void Delete(ElementType X,List L){
+	Position P,TmpCell;
+	
+	P = FindPrevious( X , L );
+	
+	if ( !IsLast( P , L) ){
+		TmpCell = P-> next;
+		p -> next = TmpCell->next;
+		free(TmpCell);
+	}
+}
+
+//寻找前驱元素p-next-emenent是p-next指向位置的值 
+Position FindPrevious(ElementType X,List L){
+	
+	Position P;
+	
+	p = L;
+	while( P-> next != NULL && P->next->Element !=X){
+		P = P->next;
+	}
+	return P;
+}
+
+//在列表中指定位置插入一个元素
+//首先申请空间，然后判断是否申请到空间
+//再改地址，利用临时地址，三角赋值吖= =  
+void Insert(EmelentType X,List L,Position P){
+
+	Position TmpCell;
+
+	TmpCell = malloc(sizeof( struct Node ));
+	if(TmpCell ==NULL){
+		FatalError("Out of space!!!");
+	
+	TemCell->Element = X;
+	TemCell ->next = P -> next;
+	P -> next = TemCell;
+	}
+}
+
+//删除列表，需要一个一个元去删除，创建一个循环去free每一个元素
+//？ - ？ 还不太懂这里？？？？？？？？？？？？？？？存疑 
+void DeleteList(List L){
+	
+	Position P,Tem;
+	
+	P = L->next;
+	L->Next = NULL;
+	while(P != NULL){
+		Tmp = P -> next;
+		free(P);
+		p = Tmp;
+	}
+}
