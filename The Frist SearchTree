@@ -1,0 +1,105 @@
+struct TreeNode
+{
+	ElementType Element;
+	SearchTree Left;
+	SearchTree Right;
+};
+
+//创建一个新的空的二叉树，创建一个空的节点，并将儿子节点的地址指向空 
+SearchTree MakeEmpty( SearchTree T ){
+	if( T != NULL ){
+		MakeEmpty( T ->Left );
+		MakeEmpty( T ->Right );
+		free( T );
+	}
+	return NULL;
+}
+
+
+//在二叉数寻找一个数字，先判断是否为空来判断是否存在
+//当二叉树不为空时，则判断x和根节点的值的大小
+// 再利用递归再次寻找，以当前节点当作根节点进行判断
+//直到为空则未找到，不大于且不小于时则为找到。 
+Position Find(ElementType X,SearchTree T){
+	if(T==NULL){
+		return NULL;
+	}
+	if(X < T->Element){
+		return Find(X,T->Left);
+	}else if(X > T->Element){
+		return Find( X ,T->Right);
+	}else{
+		return T;
+	}
+}
+
+
+//利用递归寻找最小值 
+Position FindMin(SearchTree T){
+	if ( T == NULL  ){
+		return NULL;
+	}
+	
+	if ( T->Left ==NULL){
+		return T;
+	}else{
+		return FindMin(T->Left);
+	}
+}
+
+
+//利用递归寻找最大值 
+Position FindMmx(SearchTree T){
+	if ( T == NULL  ){
+		return NULL;
+	}
+	
+	if ( T->Right ==NULL){
+		return T;
+	}else{
+		return FindMax(T->Right);
+	}
+}
+
+
+ //利用循环找最小值 
+ Position FindMin(SearchTree T){
+	if(T != NULL){
+		while( T->Left !=NULL ){
+			T = T->Left;
+		}
+	}
+}
+
+
+//利用循环找最大值 
+ Position FindMax(SearchTree T){
+	if(T != NULL){
+		while( T->Right !=NULL ){
+			T = T->Right;
+		}
+	}
+}
+
+//插入操作
+//首先判断t是否是一个存在值得二叉树，如果不存在就申请一个新的空间将值赋给此空间并作为根节点，且将子节点地址初始化为空
+//如果存在那么就需要判断x插入的位置
+//利用递归将值插入树叶位置，并返回插入的位置。   
+SearchTree Insert(ElementType X,SearchTree T){
+	if ( T == NULL ){
+		T = malloc(sizeof(struct TreeNode));
+		if(T==NULL){
+			Fatal("Out of space!!!");
+		}else{
+			T->Element = X;
+			T->Left = T->Right = NULL; 
+		}
+	}else{
+		if (X < T->Element{
+			T->Left = Insert(X,T->Left);
+		}else if(X > T-> Element){
+			T->Right = Insert(X,T->Right);
+		}
+		return T;
+	}
+}
