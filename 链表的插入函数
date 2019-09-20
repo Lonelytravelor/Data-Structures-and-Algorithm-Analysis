@@ -1,0 +1,32 @@
+struct Node;
+typedef struct Node *PtrToNode;
+typedef PtrToNode Position;
+typedef PtrToNode List;
+
+struct Node{
+	int data;
+	Position Next;
+};
+
+
+//在链表的末尾插入
+void ListInsert(int data , List L)
+{
+	Position k,j;
+	k = (List)malloc(sizeof(List)); 
+	printf("List sizeof %d\n",sizeof(Position));
+	k->data = data;
+	k->Next = NULL;
+	if (L->Next == NULL){
+		L->Next = k;
+	}
+	else
+	{
+		j = L->Next;
+		while(j->Next != NULL){
+			j = j->Next;
+		}
+		j->Next = k;
+	}
+ } 
+ 
