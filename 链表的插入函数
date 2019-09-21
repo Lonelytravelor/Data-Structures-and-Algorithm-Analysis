@@ -30,3 +30,19 @@ void ListInsert(int data , List L)
 	}
  } 
  
+//在指定个数位添加
+//不足之处：插入的位置大于链表总数，将会陷入死循环
+//方法：在这个函数中调用一个获取链表的大小的函数，在进行循环之前先进行判断插入的位置是否在链表中
+ void ListInsertNum(int data,int num,List L){
+ 	int i =2;
+ 	Position P,J;
+ 	J = L->Next;
+ 	P = (List)malloc(sizeof(struct Node));
+ 	P->Next =NULL;
+ 	P->data = data;
+ 	while(i != num){
+ 		J = J->Next;
+	 }
+	 P->Next = J->Next;
+	 J->Next = P;
+ } 
