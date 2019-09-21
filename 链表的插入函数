@@ -48,7 +48,8 @@ void ListInsert(int data , List L)
  } 
  
  //在指定地址插入节点
-//？？？在列表36
+//？？？在列表头地址插入可以插入第一个节点（值）
+//（尚有疑问）
 void ListInsertPos(int data,Linklist P,Linklist L)
  {
  	Linklist K;
@@ -56,6 +57,6 @@ void ListInsertPos(int data,Linklist P,Linklist L)
  	K->next = NULL;
  	K->data = data;
  	
- 	K->next = P->next;
- 	P->next = K;
+ 	K->next = P->next;//不应该是插入第二个位置么
+ 	P->next = K;		//或者是K->next = P;P=K;
  }
