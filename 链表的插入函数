@@ -46,3 +46,16 @@ void ListInsert(int data , List L)
 	 P->Next = J->Next;
 	 J->Next = P;
  } 
+ 
+ //在指定地址插入节点
+//？？？在列表36
+void ListInsertPos(int data,Linklist P,Linklist L)
+ {
+ 	Linklist K;
+ 	K = (Linklist)malloc(sizeof(struct LNode));
+ 	K->next = NULL;
+ 	K->data = data;
+ 	
+ 	K->next = P->next;
+ 	P->next = K;
+ }
