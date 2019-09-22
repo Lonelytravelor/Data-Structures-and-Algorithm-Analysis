@@ -1,0 +1,34 @@
+//删除链表中第一个X数值的节点
+//删除节点前要将 要删除的节点的Next地址先取出来放在一个临时变量中
+//而不能直接将Next地址赋给前面节点的Next中
+//否则，将会丢失将要删除的节点的地址
+//将要删除的节点的地址只存在于前一个节点的next值中
+void Delete (ElementType X,List L)
+{
+	Position P,TmpCell;
+	
+	P = FindPrevious(X,L);
+	if(!IsLast(P,L)){
+		TmpCell = P->Next;
+		P->Next = TmpCell->Next;
+		free(TmpCell);
+	}
+}
+
+//删除整个列表的方法
+//新建两个地址变量来存储地址信息
+//？？首先应该将头节点的地址取出，然后将其next值赋为NULL？？
+ //
+ void DeleteList(List L)
+ {
+ 	Position K,Tmp;
+ 	
+ 	K = L->Next;
+ 	L->Next =NULL;
+ 	while(K != NULL)
+ 	{
+ 		Tmp = K->Next;
+		free( K );
+ 		K = Tmp;
+	 }
+ }
