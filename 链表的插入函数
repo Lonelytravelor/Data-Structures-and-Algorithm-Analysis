@@ -49,7 +49,10 @@ void ListInsert(int data , List L)
  
  //在指定地址插入节点
 //？？？在列表头地址插入可以插入第一个节点（值）
-//（尚有疑问）
+//因为在链表中第一个header是没有值的，第一个值的位置是在L->next
+//故，如果想将数据插到第一个位置应该将L->next（第一个值）的地址赋给新申请的空间的地址位置
+//使得k指向第一个元素
+//再使header指向新节点
 void ListInsertPos(int data,Linklist P,Linklist L)
  {
  	Linklist K;
