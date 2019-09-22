@@ -42,6 +42,7 @@ Position Find(ElementType X,List L)
 
 //查找在链表中第一个为x的数，返回他的前驱的地址
 //通常来说，这个操作跟链表的删除一起使用
+//如果没有找到将返回链表最后一个元素（通常在删除中进行判断）
 FindPrevious(ElementType X,List L)
 {
 	Position P;
