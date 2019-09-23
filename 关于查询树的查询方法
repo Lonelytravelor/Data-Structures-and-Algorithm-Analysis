@@ -1,0 +1,45 @@
+//关于树的定义
+struct TreeNode;
+typedef struct TreeNode *Position;
+typedef struct TreeNode *SearchTree;
+
+struct TreeNode
+{
+	ElementType Element;
+	SearchTree Left;
+	SearchTree Right;
+};
+
+
+//关于查询一个数第一次出现在树的位置（返回这个数第一次出现的地址）
+Position Find(ElementType X,Position T)
+{
+	if( T == NULL )
+	{
+		return NULL;
+	}
+	if( X < T->Element)
+	{
+		return Find( X , T->Left );
+	}
+	else if( X > T->Element )
+	{
+		return Find ( X , T->Right );
+	}
+	else 
+	{
+		return T;
+	}
+}
+
+//返回一个树的最大值
+Position FindMax( Position T )
+{
+	if ( T == NULL ){
+		return NULL;
+	}else if( T->Right == NULL) {
+		return T;
+	}else{
+		return FindMax( T->Right);
+	}
+}
