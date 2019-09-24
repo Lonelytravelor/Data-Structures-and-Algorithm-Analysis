@@ -1,0 +1,52 @@
+#include<stdio.h>
+#include<malloc.h>
+struct Node;
+typedef struct Node *PtrToNode;
+typedef PtrToNode Stack;
+typedef PtrToNode Position;
+ 
+struct Node
+{
+	int data;
+	Position Next;
+};
+
+int IsEmpty( Position S )
+{
+	return S->Next == NULL;
+};
+
+void Pop( Position S)
+{
+	Position K;
+	if( IsEmpty( S ) ){
+		 printf("下溢");
+	}
+	K = S->Next;
+	S->Next = S->Next->Next;
+	free( K );
+}
+
+int returntop( Position S )
+{
+	if( IsEmpty( S ) ){
+		 printf("下溢");
+	}
+	return S->Next->data;
+}
+
+void Insert( int data, Position S )
+{
+	Position P ;
+	P = (Stack)malloc(sizeof(struct Node));
+	P->Next = NULL;
+	P->data = data;
+	if( IsEmpty( S ) ){
+		S->Next = P;
+	}
+	else
+	{
+		P->Next = S->Next;
+		S->Next = P;
+	}
+}
