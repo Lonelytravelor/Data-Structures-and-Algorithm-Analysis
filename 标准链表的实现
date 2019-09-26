@@ -1,0 +1,102 @@
+#include "stdio.h"
+#include "malloc.h"
+void main()
+{
+    typedef struct LNode
+    {
+       int data;
+       struct LNode *next;
+    }LNode,*Linklist;
+    Linklist L;
+    L=(Linklist)malloc(sizeof(LNode));
+    L->next=NULL;
+    void ListInsert(Linklist L,int data)//链表末端插入
+    {
+        Linklist p,q;
+        if(L->next==NULL)
+        {
+           p=(Linklist)malloc(sizeof(LNode));
+           p->next=NULL;
+           L->next=p;
+           p->data=data;
+        }
+        else
+        {
+            p=L->next;
+            while(p->next!=NULL)
+            {
+                p=p->next;
+            }
+             q=(Linklist)malloc(sizeof(LNode));
+             q->next=NULL;
+             p->next=q;
+             q->data=data;
+        }
+    }
+    //为空链表添加节点并赋值
+    ListInsert(L,8);
+    ListInsert(L,3);
+    ListInsert(L,5);
+    ListInsert(L,9);
+    ListInsert(L,7);
+    ListInsert(L,3);
+    void print(Linklist L)//遍历链表
+    {
+        Linklist p;
+        int i=1;
+        p=L->next;
+        if(p==NULL)
+        {
+            printf("该链表为空！\n");
+        }
+        else
+        {
+            while(p!=NULL)
+            {
+                printf("第%d个数据为：%d\n",i,p->data);
+                p=p->next;
+                i++;
+            }
+        }
+    }
+    print(L);
+    int GetMaxNumber(Linklist L)//寻找最大数据
+    {
+        if(L->next==NULL)
+        {
+            printf("该链表为空！");
+            return 0;
+        }
+        Linklist p;int max=0;
+        p=L->next;
+        while(p!=NULL)
+        {
+            if(p->data>max)max=p->data;
+            p=p->next;
+        }
+        return max;
+    }
+    printf("最大的数据为：%d\n",GetMaxNumber(L));
+    int GetIncrease(Linklist L)//寻找位次相邻并递增的个数
+    {
+         if(L->next==NULL)
+        {
+            printf("该链表为空！");
+            return 0;
+        }
+        int max=0,i=1;Linklist p;
+        p=L->next;
+        while(p->next!=NULL)
+        {
+           if(p->data<=p->next->data)
+           {
+              i++;
+              if(max<i)max=i;
+           }
+           else i=1;
+           p=p->next;
+        }
+        return max;
+    }
+     printf("最多有：%d个\n",GetIncrease(L));
+}
