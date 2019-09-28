@@ -1,0 +1,20 @@
+//用于查找数组中是否存在一个数字，如果存在则返回这个数的位置，不存在则返回0
+//形式参数：数组名，想要去查找的数字，数组的最大值
+int FindMid(int *a, int X ,int Last)
+{
+	int Mid ,Front;
+	Front = 1 ;
+	Mid = (int)(Last/2);	
+	while ( Front <= Last ){ /*当前标小于等于后标时进行循环判断*/
+		if( a[Mid] > X ){ /*当数组的中间值大于所查找数字时，后标的值变为中间减一且中标变为现在的前标后标之和的一半。
+			Last = Mid - 1;
+			Mid = (Front + Last) / 2;
+		}else if ( a[Mid] < X){
+			Front = Mid + 1;
+			Mid = (Front + Last) / 2;
+		}else{
+			return Mid;
+		}
+	}
+	return 0;
+}
