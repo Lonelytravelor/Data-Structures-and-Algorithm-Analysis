@@ -12,34 +12,67 @@ struct TreeNode
 
 
 //关于查询一个数第一次出现在树的位置（返回这个数第一次出现的地址）
-Position Find(ElementType X,Position T)
-{
-	if( T == NULL )
-	{
+//在二叉数寻找一个数字，先判断是否为空来判断是否存在
+//当二叉树不为空时，则判断x和根节点的值的大小
+// 再利用递归再次寻找，以当前节点当作根节点进行判断
+//直到为空则未找到，不大于且不小于时则为找到。 
+Position Find(ElementType X,SearchTree T){
+	if(T==NULL){
 		return NULL;
 	}
-	if( X < T->Element)
-	{
-		return Find( X , T->Left );
-	}
-	else if( X > T->Element )
-	{
-		return Find ( X , T->Right );
-	}
-	else 
-	{
+	if(X < T->Element){
+		return Find(X,T->Left);
+	}else if(X > T->Element){
+		return Find( X ,T->Right);
+	}else{
 		return T;
 	}
 }
 
-//返回一个树的最大值
-Position FindMax( Position T )
-{
-	if ( T == NULL ){
+
+//利用递归寻找最小值 
+Position FindMin(SearchTree T){
+	if ( T == NULL  ){
 		return NULL;
-	}else if( T->Right == NULL) {
+	}
+	
+	if ( T->Left ==NULL){
 		return T;
 	}else{
-		return FindMax( T->Right);
+		return FindMin(T->Left);
+	}
+}
+
+
+//利用递归寻找最大值 
+Position FindMmx(SearchTree T){
+	if ( T == NULL  ){
+		return NULL;
+	}
+	
+	if ( T->Right ==NULL){
+		return T;
+	}else{
+		return FindMax(T->Right);
+	}
+}
+
+
+ //利用循环找最小值 
+ Position FindMin(SearchTree T){
+	if(T != NULL){
+		while( T->Left !=NULL ){
+			T = T->Left;
+		}
+	}
+}
+
+
+//利用循环找最大值 
+ Position FindMax(SearchTree T){
+	if(T != NULL){
+		while( T->Right !=NULL ){
+			T = T->Right;
+		}
 	}
 }
