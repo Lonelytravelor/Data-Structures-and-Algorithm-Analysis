@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+//重命名
+#define MAXSIZE 10
+#define NotFound 0
+typedef int ElementType;
+
+//重命名
+typedef int Position;
+typedef struct LNode *List;
+
+//结构体定义
+struct LNode {
+    ElementType Data[MAXSIZE];
+    Position Last; /* 保存线性表中最后一个元素的位置 */
+};
+
+//函数定义
+Position BinarySearch( List L, ElementType X ){
+	int Frist,Last,Mid;
+	Frist = 1;
+	Last = L->Last;
+	Mid = ( Frist + Last )/ 2;
+	
+	while( Frist <= Last ){
+		if( X > L->Data[Mid] ){
+			Frist = Mid + 1;
+			Mid = ( Frist + Last )/ 2;
+		}else 
+		if ( X < L->Data[Mid] ){
+			Last = Mid - 1 ;
+			Mid = ( Frist + Last )/ 2;
+		}else{
+			return Mid;
+		}
+	}
+	return NotFound;
+	
+} 
